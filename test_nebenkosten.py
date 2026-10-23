@@ -4,7 +4,7 @@ from nebenkosten import anteil
 
 
 def test_anteil_normal():
-    assert anteil(1000, 50, 200) == 999.00
+    assert anteil(1000, 50, 200) == 250.00
 
 
 def test_anteil_rundet_auf_cent():

@@ -22,3 +22,16 @@ jobs:
 
       - name: Tests ausführen
         run: pytest
+        
+  docker:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Code holen
+        uses: actions/checkout@v6
+
+      - name: Docker-Image bauen
+        run: docker build -t nebenkosten:${{ github.sha }} .
+
+      - name: Docker-Image testen
+        run: test "$(docker run --rm nebenkosten:${{ github.sha }} 1200 65 130)" = "600.0"  # Hier können Sie spezifische Tests oder Befehle ausführen, um das Image zu testen.
